@@ -1,0 +1,60 @@
+<div class="register-container">
+  <h2>Register</h2>
+  <form id="mainForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="firstName">First Name</label>
+      <input id="firstName" formControlName="firstName" type="text" />
+      <div *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.invalid">
+        <small *ngIf="registerForm.get('firstName')?.errors?.['required']">First Name is required</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="lastName">Last Name</label>
+      <input id="lastName" formControlName="lastName" type="text" />
+      <div *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid">
+        <small *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="username">Username</label>
+      <input id="username" formControlName="username" type="text" />
+      <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
+        <small *ngIf="registerForm.get('username')?.errors?.['required']">Username is required</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" type="email" />
+      <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+        <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</small>
+        <small *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input id="password" formControlName="password" type="password" />
+      <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+        <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="confirmPassword">Confirm Password</label>
+      <input id="confirmPassword" formControlName="confirmPassword" type="password" />
+      <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid">
+        <small *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required</small>
+        <small *ngIf="registerForm.hasError('passwordMismatch')">Passwords do not match</small>
+      </div>
+    </div>
+    <button class="g-recaptcha"
+            data-sitekey="6LcTvgsqAAAAAIrebSy2Y7Q0jtF3b_Twlb_ZiqX9"
+            data-callback="handleCaptchaResponse"
+            data-action="signUp"
+            >Register</button>
+
+  </form>
+</div>
