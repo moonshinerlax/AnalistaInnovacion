@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';  // Make sure the path is correct
+import { environment } from '../../../environments/enviroment';
 
 declare var grecaptcha: any;
 
@@ -50,7 +51,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     grecaptcha.enterprise.ready(async () => {
-      const token = await grecaptcha.enterprise.execute('6LcTvgsqAAAAAIrebSy2Y7Q0jtF3b_Twlb_ZiqX9', {action: 'signup'});
+      const token = await grecaptcha.enterprise.execute(environment.RECAPTCHA_KEY, {action: 'signup'});
       if (token.length > 0) {
         this.captchaResolved = true
         this.recaptchaToken = token

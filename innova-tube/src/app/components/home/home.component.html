@@ -7,9 +7,13 @@
   <ul>
     <li *ngFor="let video of videos">
       <a [href]="'https://www.youtube.com/watch?v=' + video.id.videoId" target="_blank">
-        <img [src]="video.snippet.thumbnails.medium.url" alt="{{ video.snippet.title }}">
-        <div>{{ video.snippet.title }}</div>
-      </a>
+      <h3>{{ video.snippet.title }}</h3>
+
+      <img [src]="video.snippet.thumbnails.default.url" alt="{{ video.snippet.title }}">
+    </a>
+          <button (click)="toggleFavorite(video)">
+            {{ isFavorite(video.id.playlistId) ? 'Remove from Favorites' : 'Add to Favorites' }}
+          </button>
     </li>
   </ul>
 </div>

@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 
 // Rutas
 app.use('/api/auth', authroutes);
-app.use('/api/videos', checkAuth, videoroutes);
+app.use('/api/videos', videoroutes);
 
 app.listen(port, () => {
   console.log(`Backend server running at http://localhost:${port}`);

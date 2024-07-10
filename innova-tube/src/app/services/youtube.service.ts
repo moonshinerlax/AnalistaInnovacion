@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YoutubeService {
-  private apiKey = 'AIzaSyC5QUCSRwtBMUdSvWlgTjye5XHgIFV-q4c';
+  private apiKey = environment.YOUTUBE_API_KEY;
   private apiUrl = 'https://www.googleapis.com/youtube/v3/search';
 
   constructor(private http: HttpClient) { }
@@ -16,8 +17,12 @@ export class YoutubeService {
       part: 'snippet',
       maxResults: '10',
       q: query,
-      key: this.apiKey
+      key: this.apiKey,
+      type: 'video',
+      order: 'viewCount'
     };
     return this.http.get(this.apiUrl, { params });
   }
 }
+
+
