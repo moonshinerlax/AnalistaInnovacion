@@ -1,1 +1,15 @@
-<p>home works!</p>
+<div class="video-list-container">
+  <h2>Lista de Videos</h2>
+
+  <input type="text" placeholder="Buscar videos..." [(ngModel)]="searchQuery" (keyup.enter)="searchVideos()">
+  <button (click)="searchVideos()">Buscar</button>
+
+  <ul>
+    <li *ngFor="let video of videos">
+      <a [href]="'https://www.youtube.com/watch?v=' + video.id.videoId" target="_blank">
+        <img [src]="video.snippet.thumbnails.medium.url" alt="{{ video.snippet.title }}">
+        <div>{{ video.snippet.title }}</div>
+      </a>
+    </li>
+  </ul>
+</div>

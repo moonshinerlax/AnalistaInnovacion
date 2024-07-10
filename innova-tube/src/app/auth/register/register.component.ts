@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit, NgZone   } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +23,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private ngZone: NgZone
   ) {}
 
   ngOnInit(): void {
@@ -36,40 +37,44 @@ export class RegisterComponent implements OnInit {
       confirmPassword: ['', Validators.required]
     }, { validator: this.passwordMatchValidator });
 
-    window.addEventListener('captchaResolved', (event: Event) => {
-      const customEvent = event as CustomEvent<string>;
-      console.log(customEvent)
-      this.recaptchaToken = customEvent.detail;
-      this.captchaResolved = true;
-    });
   }
+
+
 
   passwordMatchValidator(form: FormGroup) {
     return form.get('password')?.value === form.get('confirmPassword')?.value
       ? null : { passwordMismatch: true };
   }
 
-  onSubmit(): void {
-    if (this.registerForm.valid && this.captchaResolved) {
-      const user = {
-        name: `${this.registerForm.value.firstName} ${this.registerForm.value.lastName}`,
-        username: this.registerForm.value.username,
-        email: this.registerForm.value.email,
-        password: this.registerForm.value.password,
-        recaptchaToken: this.recaptchaToken // Pass the recaptchaToken to AuthService
-      };
 
-      this.authService.register(user).subscribe(
-        response => {
-          console.log('User registered successfully', response);
-          this.router.navigate(['/login']);
-        },
-        error => {
-          console.error('Error registering user', error);
+
+  onSubmit(): void {
+    grecaptcha.enterprise.ready(async () => {
+      const token = await grecaptcha.enterprise.execute('6LcTvgsqAAAAAIrebSy2Y7Q0jtF3b_Twlb_ZiqX9', {action: 'signup'});
+      if (token.length > 0) {
+        this.captchaResolved = true
+        this.recaptchaToken = token
+        if (this.registerForm.valid && this.captchaResolved) {
+          const user = {
+            name: `${this.registerForm.value.firstName} ${this.registerForm.value.lastName}`,
+            username: this.registerForm.value.username,
+            email: this.registerForm.value.email,
+            password: this.registerForm.value.password,
+            recaptchaToken: this.recaptchaToken
+          };
+          console.log(user)
+          this.authService.register(user).subscribe(
+            response => {
+              console.log('User registered successfully', response);
+              this.router.navigate(['/login']);
+            },
+            error => {
+              console.error('Error registering user', error);
+            }
+          );
         }
-      );
-    } else {
-      console.error('Captcha not resolved or form invalid');
-    }
+      }
+    });
+    console.log('continue from captcha')
   }
 }

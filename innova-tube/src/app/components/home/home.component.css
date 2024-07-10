@@ -1,0 +1,28 @@
+.video-list-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.video-list-container h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.video-list-container input[type="text"], .video-list-container button {
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.video-list-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.video-list-container li {
+  margin-bottom: 10px;
+}
+
+.video-list-container img {
+  max-width: 100%;
+  height: auto;
+}
