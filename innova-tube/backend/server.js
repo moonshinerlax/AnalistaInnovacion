@@ -1,20 +1,20 @@
+require('dotenv').config();
 const express = require('express');
-// const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const authroutes = require('./routes/authroutes');
 const videoroutes = require('./routes/videoroutes');
-const { checkAuth } = require('./middleware/authmiddleware');
-// require('dotenv').config();
+const { connectDB } = require('./db');
+
 
 const app = express();
 const port = process.env.PORT || 3000;
+connectDB();
 
-// Middleware
 const corsOptions = {
-  origin: 'http://localhost:4200', // Allow only this origin
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allow these methods
-  credentials: true, // Allow cookies to be sent with requests
+  origin: 'http://localhost:4200',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
 };
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
@@ -26,18 +26,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Conectar a MongoDB
-// mongoose.connect(process.env.MONGO_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useCreateIndex: true
-// }).then(() => {
-//   console.log('Connected to MongoDB');
-// }).catch(err => {
-//   console.error('Failed to connect to MongoDB', err);
-// });
-
-// Rutas
 app.use('/api/auth', authroutes);
 app.use('/api/videos', videoroutes);
 

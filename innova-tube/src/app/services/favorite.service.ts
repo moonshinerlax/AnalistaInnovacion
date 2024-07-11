@@ -14,11 +14,12 @@ export class FavoriteService {
     return this.http.post(`${this.apiUrl}/add`, video);
   }
 
-  removeFavorite(favoriteId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/remove/${favoriteId}`);
+  removeFavorite(userId: string, videoId: string): Observable<any> {
+    const params = { userId, videoId }
+    return this.http.delete(`${this.apiUrl}/remove`, {params});
   }
 
-  getFavorites(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getFavorites(id: any): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/favorites/${id}`);
   }
 }

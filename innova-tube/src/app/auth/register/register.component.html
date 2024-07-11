@@ -1,56 +1,64 @@
 <div class="register-container">
   <h2>Register</h2>
-  <form id="mainForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="firstName">First Name</label>
-      <input id="firstName" formControlName="firstName" type="text" placeholder="Enter your first name" />
+
+  <form id="mainForm" class="formContainer" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+    <div class="nameContainer">
+    <mat-form-field >
+      <mat-label for="firstName">First Name</mat-label>
+      <input matInput id="firstName" formControlName="firstName" type="text" placeholder="Enter your first name" />
       <div *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.invalid">
         <small *ngIf="registerForm.get('firstName')?.errors?.['required']">First Name is required</small>
       </div>
+    </mat-form-field>
+      <mat-form-field >
+        <mat-label for="lastName">Last Name</mat-label>
+        <input class="input" matInput id="lastName" formControlName="lastName" type="text" placeholder="Enter your last name" />
+        <div *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid">
+          <small *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required</small>
+        </div>
+      </mat-form-field>
     </div>
 
-    <div>
-      <label for="lastName">Last Name</label>
-      <input id="lastName" formControlName="lastName" type="text" placeholder="Enter your last name" />
-      <div *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid">
-        <small *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required</small>
-      </div>
+      <div class="usernameContainer">
+      <mat-form-field >
+        <mat-label for="username">Username</mat-label>
+        <input matInput id="username" formControlName="username" type="text" placeholder="Choose a username" />
+        <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
+          <small *ngIf="registerForm.get('username')?.errors?.['required']">Username is required</small>
+        </div>
+        </mat-form-field>
+
+      <mat-form-field >
+        <mat-label for="email">Email</mat-label>
+        <input matInput id="email" formControlName="email" type="email" placeholder="Enter your email" />
+        <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+          <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</small>
+          <small *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format</small>
+        </div>
+      </mat-form-field>
     </div>
 
-    <div>
-      <label for="username">Username</label>
-      <input id="username" formControlName="username" type="text" placeholder="Choose a username" />
-      <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
-        <small *ngIf="registerForm.get('username')?.errors?.['required']">Username is required</small>
-      </div>
+    <div class="passwordContainer">
+      <mat-form-field >
+        <mat-label for="password">Password</mat-label>
+        <input matInput id="password" formControlName="password" type="password" placeholder="Enter a password" />
+        <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+          <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</small>
+        </div>
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label for="confirmPassword">Confirm Password</mat-label>
+        <input matInput id="confirmPassword" formControlName="confirmPassword" type="password" placeholder="Confirm your password" />
+        <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid">
+          <small *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required</small>
+          <small *ngIf="registerForm.hasError('passwordMismatch')">Passwords do not match</small>
+        </div>
+      </mat-form-field>
     </div>
 
-    <div>
-      <label for="email">Email</label>
-      <input id="email" formControlName="email" type="email" placeholder="Enter your email" />
-      <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
-        <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</small>
-        <small *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format</small>
-      </div>
-    </div>
-
-    <div>
-      <label for="password">Password</label>
-      <input id="password" formControlName="password" type="password" placeholder="Enter a password" />
-      <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
-        <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</small>
-      </div>
-    </div>
-
-    <div>
-      <label for="confirmPassword">Confirm Password</label>
-      <input id="confirmPassword" formControlName="confirmPassword" type="password" placeholder="Confirm your password" />
-      <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid">
-        <small *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required</small>
-        <small *ngIf="registerForm.hasError('passwordMismatch')">Passwords do not match</small>
-      </div>
-    </div>
-
-    <button type="submit" >Register</button>
+    <button mat-raised-button class="button" type="submit" >Register</button>
   </form>
+  <small *ngIf="registerStatus">{{registerMessage}}</small>
 </div>

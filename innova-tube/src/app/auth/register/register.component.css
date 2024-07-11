@@ -1,0 +1,39 @@
+.register-container{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  background-color: rgba(0, 0, 0, 0.116);
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.nameContainer{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.usernameContainer{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.passwordContainer{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button{
+  width: 200px;
+}
+
+.input{
+  color: black;
+}

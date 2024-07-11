@@ -63,11 +63,11 @@
 
   main {
     width: 100%;
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
+    min-height: 100px;
+    /* display: flex;
+    justify-content: center; */
     align-items: center;
-    box-sizing: inherit;
+    /* box-sizing: inherit; */
     position: relative;
   }
 
@@ -76,7 +76,7 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
-    max-width: 700px;
+    /* max-width: 700px; */
     margin-bottom: 3rem;
   }
 
@@ -106,8 +106,29 @@
 
 <main class="main">
   <div class="content">
+    <a href="/">
+      <img src="/assets/images/Untitled-1.png" width="300" height="100" alt="">
+    </a>
 
-    <img src="/assets/images/Untitled-1.png" width="300" height="100" alt="">
+    <div *ngIf="!isLoading && isLoggedIn">
+      <p>Welcome, {{ user.name }}!</p>
+      <a href="/favorites">
+        <p>Watch your favorites</p>
+      </a>
+        <button (click)="logOut()">Log Out</button>
+    </div>
+
+    <div *ngIf="!isLoading && !isLoggedIn">
+      <p class="userSection">
+        <a href="/register">
+          Register
+        </a>
+        /
+        <a href="/login">
+          Login
+        </a>
+      </p>
+    </div>
 
     </div>
 </main>

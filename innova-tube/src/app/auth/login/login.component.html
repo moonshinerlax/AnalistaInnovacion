@@ -1,22 +1,23 @@
 <!-- src/app/auth/login/login.component.html -->
 <div class="login-container">
   <h2>Login</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="email">Email</label>
-      <input id="email" formControlName="email" type="email" />
+  <form class="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label for="email">Email</mat-label>
+      <input matInput id="email" formControlName="email" type="email" />
       <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
         <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</small>
         <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format</small>
       </div>
-    </div>
-    <div>
-      <label for="password">Password</label>
-      <input id="password" formControlName="password" type="password" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="password">Password</mat-label>
+      <input matInput id="password" formControlName="password" type="password" />
       <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
         <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</small>
       </div>
-    </div>
-    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+    </mat-form-field>
+    <button  mat-raised-button class="button" type="submit" [disabled]="!loginForm.valid">Login</button>
+    <small *ngIf="loginStatus"> {{loginMessage}} </small>
   </form>
 </div>

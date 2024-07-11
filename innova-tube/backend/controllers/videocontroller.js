@@ -1,16 +1,24 @@
+const { getDB } = require("../db");
+
 let favorites = [];
 
 exports.getVideos = async (req, res) => {
-  // Implementar lógica para obtener videos de YouTube
+
 };
 
 exports.addFavorite = async (req, res) => {
-  const { userId, videoId } = req.body;
   try {
-    const { videoId, title, thumbnail } = req.body;
+    const { userId, videoId, title, thumbnail } = req.body;
 
     const favorite = { userId, videoId, title, thumbnail, id: favorites.length + 1 };
-    favorites.push(favorite);
+    const db = getDB()
+
+    let fav = await db.collection('favorites').findOne({ videoId })
+    if (fav) {
+      return res.status(400).json({ message: 'Video already a favorite' });
+    }
+
+    await db.collection('favorites').insertOne(favorite);
 
     res.status(201).json({ message: 'Video added to favorites', favorite });
   } catch (error) {
@@ -20,24 +28,29 @@ exports.addFavorite = async (req, res) => {
 };
 
 exports.removeFavorite = async (req, res) => {
-  const { userId, videoId } = req.params;
+  const { userId, videoId } = req.query;
   try {
-    const favoriteId = parseInt(req.params.id);
-    favorites = favorites.filter(fav => fav.id !== favoriteId);
+
+    const db = getDB();
+
+    await db.collection('favorites').findOneAndDelete({ userId: userId, videoId: videoId });
 
     res.status(200).json({ message: 'Video removed from favorites' });
   } catch (error) {
-    console.error('Error removing favorite:', error);
+
     res.status(500).json({ message: 'Internal server error' });
   }
 };
 
 exports.getFavorites = async (req, res) => {
-  const { userId } = req.query;
+  const { id } = req.params;
   try {
-    const userFavorites = favorites.filter(fav => fav.userId === userId);
+    const db = getDB();
 
-    res.status(200).json(userFavorites);
+    const videosCursor = db.collection('favorites').find({ userId: id });
+    const videos = await videosCursor.toArray();
+
+    res.status(200).json({videos});
   } catch (error) {
     console.error('Error getting favorites:', error);
     res.status(500).json({ message: 'Internal server error' });

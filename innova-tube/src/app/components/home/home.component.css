@@ -26,3 +26,36 @@
   max-width: 100%;
   height: auto;
 }
+
+.container {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  ;
+}
+
+.title{
+  font-size: small;
+  max-height: 25px;
+}
+
+.actions{
+  height: 100px;
+}
+
+.example-card {
+  width: 250px;
+  height: 270px;
+}
+
+.input{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.example-header-image {
+  background-size: cover;
+}
