@@ -14,7 +14,7 @@ export class UserService {
 
   getCurrentUser(token: any): Observable<any> {
 
-    return this.http.get(`${this.apiUrl}/me`, {
+    return this.http.get(`${this.apiUrl}auth/me`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

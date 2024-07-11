@@ -25,14 +25,14 @@ const port = process.env.PORT || 3000;
 connectDB();
 
 const corsOptions = {
-  origin: 'http://localhost:4200',
+  origin: 'https://innova-tube-livid.vercel.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 };
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Origin', 'https://innova-tube-livid.vercel.app');
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
