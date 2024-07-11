@@ -2,9 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/package.json"
-    },
-    {
       "src": "backend/api/**/*.js",
       "use": "@vercel/node"
     }
