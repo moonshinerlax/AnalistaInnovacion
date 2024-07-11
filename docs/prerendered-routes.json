@@ -1,8 +1,0 @@
-{
-  "routes": [
-    "/",
-    "/favorites",
-    "/login",
-    "/register"
-  ]
-}

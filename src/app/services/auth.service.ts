@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../environments/enviroment.prod';
 
 interface LoginResponse {
   token: string;
@@ -13,7 +14,7 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = environment.apiUrl;
   private authStatusSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn());
   public authStatus: Observable<boolean> = this.authStatusSubject.asObservable();
 
