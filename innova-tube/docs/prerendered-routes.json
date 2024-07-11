@@ -1,0 +1,8 @@
+{
+  "routes": [
+    "/",
+    "/favorites",
+    "/login",
+    "/register"
+  ]
+}
