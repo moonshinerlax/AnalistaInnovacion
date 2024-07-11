@@ -2,12 +2,12 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/package.json",
+      "src": "docs/browser",
       "use": "@vercel/static-build",
       "config": { "distDir": "docs/browser" }
     },
     {
-      "src": "backend/api/package.json",
+      "src": "docs/server",
       "use": "@vercel/node"
     }
   ],
