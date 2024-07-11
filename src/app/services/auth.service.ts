@@ -25,11 +25,11 @@ export class AuthService {
   ) { }
 
   register(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/register`, user);
+    return this.http.post(`${this.apiUrl}/api/auth/register`, user);
   }
 
   login(email: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, { email, password }).pipe(
+    return this.http.post<LoginResponse>(`${this.apiUrl}/api/auth/login`, { email, password }).pipe(
       tap(response => {
         if (response && response.token) {
           this.cookieService.set('token', response.token);

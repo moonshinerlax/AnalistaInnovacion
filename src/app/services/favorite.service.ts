@@ -12,15 +12,15 @@ export class FavoriteService {
   constructor(private http: HttpClient) { }
 
   addFavorite(video: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/videos/add`, video);
+    return this.http.post(`${this.apiUrl}/api/videos/add`, video);
   }
 
   removeFavorite(userId: string, videoId: string): Observable<any> {
     const params = { userId, videoId }
-    return this.http.delete(`${this.apiUrl}/videos/remove`, {params});
+    return this.http.delete(`${this.apiUrl}/api/videos/remove`, {params});
   }
 
   getFavorites(id: any): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/videos/favorites/${id}`);
+    return this.http.get<any[]>(`${this.apiUrl}/api/videos/favorites/${id}`);
   }
 }
