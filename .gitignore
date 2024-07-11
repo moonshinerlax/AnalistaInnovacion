@@ -7,9 +7,6 @@
 /bazel-out
 
 #Enviroments
-/Enviroments/
-/environments/enviroment.ts
-/environments/enviroment.prod.ts
 .env
 
 # Node
